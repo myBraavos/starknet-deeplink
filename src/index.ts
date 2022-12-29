@@ -13,6 +13,8 @@ export const baseUrl = "https://starknet.app.link";
  * Generates a "dapp" deeplink url for the given dapp url
  *
  * @param url valid http(s) url
+ *
+ * @return "dapp" deeplink, i.e. https://starknet.app.link/dapp/example.xyz
  */
 export const dapp = (url: string): string => {
     const res = dappUrl(url);
@@ -25,6 +27,9 @@ export const dapp = (url: string): string => {
  * @param to_address beneficiary address
  * @param options - `token` to be used for this transfer
  *                  `amount` requested (optional)
+ *
+ * @return "transfer" deeplink, i.e. -
+ * https://starknet.app.link/transfer/<token_address>@<chain_id>?address=<beneficiary_address>(&uint256=1)
  */
 export const transfer = (to_address: string, options: TransferOptions): string => {
     const res = transferUrl(to_address, options);
@@ -40,6 +45,9 @@ export const transfer = (to_address: string, options: TransferOptions): string =
  * Generates a "watchAsset" deeplink url for adding ("watching") the given token ("asset")
  *
  * @param token `token` to be requested for adding
+ *
+ * @return "addToken" deeplink, i.e. -
+ * https://starknet.app.link/watchAsset/<token_address>@<chain_id>?type=ERC20
  */
 export const addToken = (token: Token): string => {
     const res = addTokenUrl(token);
