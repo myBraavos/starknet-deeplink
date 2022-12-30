@@ -1,9 +1,10 @@
-import type { Token, TransferOptions } from "starknet-url";
+import type { ChainId, Token, TransferOptions } from "starknet-url";
 import {
     addToken as addTokenUrl,
     dapp as dappUrl,
     parse,
     STARKNET_SCHEMA,
+    StarknetChainId,
     transfer as transferUrl,
 } from "starknet-url";
 
@@ -17,8 +18,11 @@ export const baseUrl = "https://starknet.app.link";
  * @return "dapp" deeplink, i.e. https://starknet.app.link/dapp/example.xyz
  */
 export const dapp = (url: string): string => {
-    const res = dappUrl(url);
-    return res.replace(STARKNET_SCHEMA, baseUrl).replace("dapp-", "/dapp/");
+    const raw = dappUrl(url);
+    const result = raw.replace(STARKNET_SCHEMA, baseUrl).replace("dapp-", "/dapp/");
+
+    console.log(`dapp -> ${JSON.stringify({ url, result })}`);
+    return result;
 };
 
 /**
@@ -32,13 +36,14 @@ export const dapp = (url: string): string => {
  * https://starknet.app.link/transfer/<token_address>@<chain_id>?address=<beneficiary_address>(&uint256=1)
  */
 export const transfer = (to_address: string, options: TransferOptions): string => {
-    const res = transferUrl(to_address, options);
-    const parsed = parse(res);
+    const raw = transferUrl(to_address, options);
+    const parsed = parse(raw);
 
-    let url = `${baseUrl}/${parsed.function_name}/${parsed.target_address}@${parsed.chain_id}`;
-    if (parsed.parameters) url += res.substring(res.lastIndexOf("?"));
+    let result = `${baseUrl}/${parsed.function_name}/${parsed.target_address}@${parsed.chain_id}`;
+    if (parsed.parameters) result += raw.substring(raw.lastIndexOf("?"));
 
-    return url;
+    console.log(`transfer -> ${JSON.stringify({ to_address, options, result })}`);
+    return result;
 };
 
 /**
@@ -50,10 +55,16 @@ export const transfer = (to_address: string, options: TransferOptions): string =
  * https://starknet.app.link/watchAsset/<token_address>@<chain_id>?type=ERC20
  */
 export const addToken = (token: Token): string => {
-    const res = addTokenUrl(token);
-    const parsed = parse(res);
+    const raw = addTokenUrl(token);
+    const parsed = parse(raw);
 
-    return `${baseUrl}/${parsed.function_name}/${parsed.target_address}@${
+    const result = `${baseUrl}/${parsed.function_name}/${parsed.target_address}@${
         parsed.chain_id
-    }${res.substring(res.lastIndexOf("?"))}`;
+    }${raw.substring(raw.lastIndexOf("?"))}`;
+
+    console.log(`addToken -> ${JSON.stringify({ token, result })}`);
+    return result;
 };
+
+export type { ChainId, Token, TransferOptions };
+export { StarknetChainId };

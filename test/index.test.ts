@@ -146,6 +146,7 @@ describe("addToken", () => {
         // @ts-expect-error TS2322 we want to test raw js access
         expect(() => addToken({ token_address: "foo" })).toThrow();
 
+        // @ts-expect-error TS2322 we want to test raw js access
         expect(() => addToken({ token_address: "0x0", chainId: null })).toThrow();
 
         // @ts-expect-error TS2322 we want to test raw js access
