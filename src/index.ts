@@ -1,6 +1,9 @@
-import type { ChainId, Token, TransferOptions } from "starknet-url";
+// noinspection UnnecessaryLocalVariableJS
+
+import type { Token, TransferOptions } from "starknet-url";
 import {
     addToken as addTokenUrl,
+    ChainId,
     dapp as dappUrl,
     parse,
     STARKNET_SCHEMA,
@@ -21,7 +24,6 @@ export const dapp = (url: string): string => {
     const raw = dappUrl(url);
     const result = raw.replace(STARKNET_SCHEMA, baseUrl).replace("dapp-", "/dapp/");
 
-    console.log(`dapp -> ${JSON.stringify({ url, result })}`);
     return result;
 };
 
@@ -42,7 +44,6 @@ export const transfer = (to_address: string, options: TransferOptions): string =
     let result = `${baseUrl}/${parsed.function_name}/${parsed.target_address}@${parsed.chain_id}`;
     if (parsed.parameters) result += raw.substring(raw.lastIndexOf("?"));
 
-    console.log(`transfer -> ${JSON.stringify({ to_address, options, result })}`);
     return result;
 };
 
@@ -62,9 +63,8 @@ export const addToken = (token: Token): string => {
         parsed.chain_id
     }${raw.substring(raw.lastIndexOf("?"))}`;
 
-    console.log(`addToken -> ${JSON.stringify({ token, result })}`);
     return result;
 };
 
-export type { ChainId, Token, TransferOptions };
-export { StarknetChainId };
+export type { Token, TransferOptions };
+export { ChainId, StarknetChainId };
