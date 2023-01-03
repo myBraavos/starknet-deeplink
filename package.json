@@ -48,7 +48,7 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "starknet-url": "^1.0.0"
+    "starknet-url": "^1.0.1"
   },
   "lint-staged": {
     "**/*.{js,ts}": "prettier --write --ignore-unknown"

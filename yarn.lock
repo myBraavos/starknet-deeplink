@@ -4811,8 +4811,10 @@ stack-utils@^2.0.3:
   dependencies:
     escape-string-regexp "^2.0.0"
 
-starknet-url@../starknet-url/:
-  version "1.0.0"
+starknet-url@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/starknet-url/-/starknet-url-1.0.1.tgz#5175c68a7045c60d60cdf83c389fd1b6f8687258"
+  integrity sha512-BBsV05PYNDkHgOxv/XiwrOsHuXvOLooZI1n/Tu23AjtwH0+EFuX1eDZPo1QqVdpwYZRY8Bc1ZvB2nL3cEAbNlg==
   dependencies:
     qs "^6.11.0"
     validator "^13.7.0"
