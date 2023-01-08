@@ -1,5 +1,4 @@
-import { addToken, baseUrl, dapp, transfer } from "../src";
-import { StarknetChainId } from "starknet-url";
+import { addToken, baseUrl, dapp, StarknetChainId, transfer } from "../src";
 
 const STARKNET_TEST_ACCOUNT = "0x12345";
 const STARKNET_ETH = "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7";
